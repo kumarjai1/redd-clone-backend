@@ -1,9 +1,7 @@
 package com.ga.config;
 
 import java.util.Properties;
-
 import javax.sql.DataSource;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +18,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class AppConfig {
 	
 	@Bean
-	public LocalSessionFactoryBean sessionFactory () {
+	public LocalSessionFactoryBean sessionFactory() {
+		
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		
 		sessionFactory.setDataSource(dataSource());
@@ -30,10 +29,21 @@ public class AppConfig {
 		return sessionFactory;
 	}
 
-	//set hibernate default properties - dialect, create tables, logging
-	private Properties hibernateProperties() {
-		Properties hibernateProperties = new Properties();
+	@Bean
+	public DataSource dataSource() {
+		BasicDataSource dataSource = new BasicDataSource();
 		
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/reddclone");
+		dataSource.setUsername("jai");
+        dataSource.setPassword("jmkc2002");
+
+		return dataSource;
+	}
+
+	private final Properties hibernateProperties() {
+		Properties hibernateProperties = new Properties();
+
 		hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		hibernateProperties.setProperty("hibernate.current_session_context_class", "thread");
 		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create"); // create-drop update
@@ -42,25 +52,11 @@ public class AppConfig {
 		return hibernateProperties;
 	}
 
-	//connect to database
-	private DataSource dataSource() {
-		// TODO Auto-generated method stub
-		BasicDataSource dataSource = new BasicDataSource();
-		
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc.postgresql://localhost:5432/reddclone");
-		
-		return dataSource;
-	}
-	
 	@Bean
 	public HibernateTransactionManager getTransactionManager() {
-		
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-		transactionManager.setSessionFactory(sessionFactory().getObject());
-		
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();		
+		transactionManager.setSessionFactory(sessionFactory().getObject());		
 		return transactionManager;
 	}
-	
-	
+
 }
