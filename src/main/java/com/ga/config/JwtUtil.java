@@ -33,7 +33,7 @@ public class JwtUtil implements Serializable{
 				.setSubject(username)
 				.setIssuedAt(new Date (System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-				.signWith(SignatureAlgorithm.ES512, secret).compact();
+				.signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 	
 	//this returns username from the token

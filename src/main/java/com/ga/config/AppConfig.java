@@ -1,7 +1,9 @@
 package com.ga.config;
 
 import java.util.Properties;
+
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,10 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan("com.ga")
 public class AppConfig {
-	
+
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
-		
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		
 		sessionFactory.setDataSource(dataSource());
@@ -35,8 +36,6 @@ public class AppConfig {
 		
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/reddclone");
-		dataSource.setUsername("jai");
-        dataSource.setPassword("jmkc2002");
 
 		return dataSource;
 	}
@@ -54,8 +53,10 @@ public class AppConfig {
 
 	@Bean
 	public HibernateTransactionManager getTransactionManager() {
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager();		
-		transactionManager.setSessionFactory(sessionFactory().getObject());		
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		
+		transactionManager.setSessionFactory(sessionFactory().getObject());
+		
 		return transactionManager;
 	}
 
