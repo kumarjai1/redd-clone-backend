@@ -29,12 +29,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired 
 	JwtUtil jwtUtil;
 	
-	
+	private User user;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		User user = userDao.getUserByUsername(username);
+		this.user = user;
 		if (user == null) throw new UsernameNotFoundException("Unknown usernamer " + username);
 		return new org.springframework.security.core.userdetails.User
 				(user.getUsername(), bCryptPasswordEncoder.encode(user.getPassword()), true, true, true, true, getGrantedAuthorities(user));
@@ -71,6 +72,10 @@ public class UserServiceImpl implements UserService {
 			return jwtUtil.generateToken(userDetails);
 		}
 		return null;
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
 }

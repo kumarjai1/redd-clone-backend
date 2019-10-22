@@ -9,5 +9,6 @@ public interface UserService extends UserDetailsService {
 
 	public String signup (User user);
 	public String login(User user);
+	public User getUser();
 	
 }

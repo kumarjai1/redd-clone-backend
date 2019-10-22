@@ -15,8 +15,8 @@ public class PostServiceImpl implements PostService {
 	private PostDao postDao;
 	
 	@Override
-	public Post createPost(Post post) {
-		return postDao.createPost(post);
+	public Post createPost(String username, Post post) {		
+		return postDao.createPost(username, post);
 	}
 
 	@Override
