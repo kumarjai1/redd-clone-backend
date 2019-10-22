@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,8 +23,20 @@ public class User {
 	
     @Column(name = "password", nullable = false)
     private String password;
+    
+    @Column(name = "email", nullable = false)
+    @Email(message = "{user.email.invalide}")
+    private String email;
 
-    public User() {}
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public User() {}
     
     public Long getUserId() {
 		return userId;
