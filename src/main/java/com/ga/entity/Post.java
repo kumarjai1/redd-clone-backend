@@ -2,6 +2,8 @@ package com.ga.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -19,6 +21,7 @@ public class Post {
     
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({ "password", "email", "userId" })
     private User user;
 
 	public Long getPostId() {
