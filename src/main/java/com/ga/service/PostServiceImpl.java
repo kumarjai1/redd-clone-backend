@@ -21,8 +21,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> listPosts() {
-		// TODO Auto-generated method stub
-		return null;
+		return postDao.listPosts();
 	}
 
 }

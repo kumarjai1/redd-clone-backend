@@ -37,8 +37,16 @@ public class PostDaoImpl implements PostDao {
 
 	@Override
 	public List<Post> listPosts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Session session = sessionFactory.getCurrentSession();
+		List <Post> allPosts = null;
+		try {
+			session.beginTransaction();
+			allPosts = session.createQuery("From Post").getResultList();
+			
+		} finally {
+			session.close();
+		}
+		return allPosts;
+ 	}
 
 }

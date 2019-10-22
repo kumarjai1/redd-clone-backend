@@ -1,6 +1,9 @@
 package com.ga.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +28,10 @@ public class PostController {
 //		"we need a way to get the username from token"
 		String username = userService.getUser().getUsername();
 		return postService.createPost(username, post);
+	}
+	
+	@GetMapping("/list")
+	public List<Post> listPosts() {
+		return postService.listPosts();
 	}
 }
