@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ga.entity.User;
+import com.ga.exception.EntityNotFoundException;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -28,16 +29,20 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User login(User user) {
+	public User login(User user) throws EntityNotFoundException {
 		User savedUser = null;
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
 			savedUser = (User)session.createQuery("FROM User u WHERE u.username = '" 
 			+ user.getUsername() + "'").getSingleResult();	
-		} finally {
-			session.close();
+		} catch (Exception es) {
+			throw new EntityNotFoundException("User does not exist");
+		}	
+			finally {
 		}
+			session.close();
+		
 		// TODO Auto-generated method stub
 		return savedUser;
 	}

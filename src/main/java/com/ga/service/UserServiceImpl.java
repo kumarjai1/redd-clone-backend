@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import com.ga.config.JwtUtil;
 import com.ga.dao.UserDao;
 import com.ga.entity.User;
+import com.ga.exception.EntityNotFoundException;
+import com.ga.exception.LoginException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,6 +37,7 @@ public class UserServiceImpl implements UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		User user = userDao.getUserByUsername(username);
+		//this saves the current user to be returned later
 		this.user = user;
 		if (user == null) throw new UsernameNotFoundException("Unknown usernamer " + username);
 		return new org.springframework.security.core.userdetails.User
@@ -63,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String login(User user) {
+	public String login(User user) throws LoginException, EntityNotFoundException {
 		User foundUser = userDao.login(user);
 		if (foundUser != null &&  
 				foundUser.getUserId() != null && 
@@ -71,7 +74,8 @@ public class UserServiceImpl implements UserService {
 			UserDetails userDetails = loadUserByUsername(foundUser.getUsername());
 			return jwtUtil.generateToken(userDetails);
 		}
-		return null;
+		throw new LoginException("Username/password incorrect");
+		
 	}
 	
 	public User getUser() {
