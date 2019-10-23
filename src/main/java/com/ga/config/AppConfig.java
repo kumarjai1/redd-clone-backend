@@ -1,5 +1,6 @@
 package com.ga.config;
 
+
 import java.util.Properties;
 
 import javax.sql.DataSource;

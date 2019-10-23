@@ -24,7 +24,7 @@ public class Post {
     
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({ "password", "email", "userId" })
+    @JsonIgnoreProperties({ "password", "email", "userId", "userProfile"})
     private User user;
     
     @JsonIgnore
