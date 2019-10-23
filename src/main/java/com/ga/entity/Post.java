@@ -28,7 +28,8 @@ public class Post {
     private User user;
     
     @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = {CascadeType.ALL})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = {CascadeType.REMOVE, 
+    		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Comment> comments;
 
 	public List<Comment> getComments() {

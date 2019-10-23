@@ -40,7 +40,6 @@ public class CommentDaoImpl implements CommentDao {
 		try {
 			session.beginTransaction();
 			currentComment = session.get(Comment.class, commentId);
-			session.clear();
 			session.delete(currentComment);
 			
 			session.getTransaction().commit();
