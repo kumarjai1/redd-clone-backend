@@ -1,7 +1,10 @@
 package com.ga.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -23,6 +26,18 @@ public class Post {
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties({ "password", "email", "userId" })
     private User user;
+    
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	public Long getPostId() {
 		return postId;
@@ -55,7 +70,5 @@ public class Post {
 	public void setUser(User user) {
 		this.user = user;
 	}
-    
-    
     
 }
