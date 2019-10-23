@@ -40,7 +40,9 @@ public class CommentDaoImpl implements CommentDao {
 		try {
 			session.beginTransaction();
 			currentComment = session.get(Comment.class, commentId);
+			session.clear();
 			session.delete(currentComment);
+			
 			session.getTransaction().commit();
 			results = "Comment was successfully deleted";
 		} finally {
@@ -49,23 +51,4 @@ public class CommentDaoImpl implements CommentDao {
 		
 		return results;
 	}
-	
-//	@Override
-//	public String deletePost(Long postId) {
-//		Session session = sessionFactory.getCurrentSession();
-//		Post currentPost = null;
-//		String results = "";
-//		try {
-//			session.beginTransaction();
-//			currentPost = session.get(Post.class, postId);
-//			session.delete(currentPost);
-//			session.getTransaction().commit();
-//			results = "Post was successfully deleted";
-//		} finally {
-//			session.close();
-//		}
-//		
-//		return results;
-//	}
-
 }
