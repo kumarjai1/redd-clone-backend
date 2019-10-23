@@ -17,17 +17,12 @@ public class PostDaoImpl implements PostDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	@Autowired
-	private UserDao userDao;
-	
 	@Override
-	public Post createPost(String username, Post post) {
-		User currentUser = userDao.getUserByUsername(username);
+	public Post createPost(Post post) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.beginTransaction();
-			post.setUser(currentUser);
 			session.save(post);
 			session.getTransaction().commit();
 		} finally {

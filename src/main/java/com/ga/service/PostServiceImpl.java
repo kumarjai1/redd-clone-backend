@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ga.dao.PostDao;
 import com.ga.entity.Comment;
 import com.ga.entity.Post;
+import com.ga.entity.User;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -15,9 +16,14 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostDao postDao;
 	
+	@Autowired
+	private UserService userService;
+	
 	@Override
-	public Post createPost(String username, Post post) {		
-		return postDao.createPost(username, post);
+	public Post createPost(Post post) {
+		User currentUser = userService.getUser();
+		post.setUser(currentUser);
+		return postDao.createPost(post);
 	}
 
 	@Override

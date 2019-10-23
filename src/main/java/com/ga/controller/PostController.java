@@ -29,8 +29,8 @@ public class PostController {
 	public Post createPost(@RequestBody Post post) {
 		
 //		"we need a way to get the username from token"
-		String username = userService.getUser().getUsername();
-		return postService.createPost(username, post);
+
+		return postService.createPost(post);
 	}
 	
 	@GetMapping("/list")
@@ -45,6 +45,7 @@ public class PostController {
 	
 	@DeleteMapping("/{postId}")
 	public String deletePost(@PathVariable Long postId) {
+//		TODO: only same creator of post can delete post
 		return postService.deletePost(postId);
 	}
 }

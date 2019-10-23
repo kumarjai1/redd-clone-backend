@@ -23,7 +23,7 @@ public class Post {
     private String description;
     
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({ "password", "email", "userId" })
     private User user;
     
