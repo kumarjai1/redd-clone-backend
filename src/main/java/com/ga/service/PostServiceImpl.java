@@ -30,4 +30,9 @@ public class PostServiceImpl implements PostService {
 		return postDao.listComments(postId);
 	}
 
+	@Override
+	public String deletePost(Long postId) {
+		return postDao.deletePost(postId);
+	}
+
 }
