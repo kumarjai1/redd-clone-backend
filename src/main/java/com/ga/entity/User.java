@@ -32,8 +32,20 @@ public class User {
     @Column(name = "email", nullable = false)
     @Email(message = "{user.email.invalide}")
     private String email;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_profile_id")
+    private UserProfile userProfile;
 
-    public String getEmail() {
+    public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+
+	public String getEmail() {
 		return email;
 	}
 
