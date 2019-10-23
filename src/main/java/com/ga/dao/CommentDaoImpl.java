@@ -32,4 +32,40 @@ public class CommentDaoImpl implements CommentDao {
 		return comment;
 	}
 
+	@Override
+	public String deleteComment(Long commentId) {
+		Session session = sessionFactory.getCurrentSession();
+		Comment currentComment = null;
+		String results = "";
+		try {
+			session.beginTransaction();
+			currentComment = session.get(Comment.class, commentId);
+			session.delete(currentComment);
+			session.getTransaction().commit();
+			results = "Comment was successfully deleted";
+		} finally {
+			session.close();
+		}
+		
+		return results;
+	}
+	
+//	@Override
+//	public String deletePost(Long postId) {
+//		Session session = sessionFactory.getCurrentSession();
+//		Post currentPost = null;
+//		String results = "";
+//		try {
+//			session.beginTransaction();
+//			currentPost = session.get(Post.class, postId);
+//			session.delete(currentPost);
+//			session.getTransaction().commit();
+//			results = "Post was successfully deleted";
+//		} finally {
+//			session.close();
+//		}
+//		
+//		return results;
+//	}
+
 }

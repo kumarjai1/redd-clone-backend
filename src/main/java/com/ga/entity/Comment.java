@@ -66,5 +66,5 @@ public class Comment {
 	public void setPost(Post post) {
 		this.post = post;
 	}
-	
+
 }
