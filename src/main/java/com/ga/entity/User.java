@@ -29,7 +29,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
     
-    @Column(name = "email", nullable = false)
+    @NotBlank(message = "Email cannot be blank")
+    @Column(name = "email", nullable = false, unique=true)
     @Email(message = "{user.email.invalide}")
     private String email;
     

@@ -1,5 +1,8 @@
 package com.ga.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +33,28 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody User user) {
-		return ResponseEntity.ok(new JwtResponse(userService.signup(user)));
+		JwtResponse response = new JwtResponse(userService.signup(user));
+		Map <String, String> mappedResponse = null;
+		if (response.getToken() != null) {
+			mappedResponse = new HashMap();
+			mappedResponse.put("token", response.getToken());
+			mappedResponse.put("username", userService.getUser().getUsername());
+		}
+		
+		return ResponseEntity.ok(mappedResponse);
 	}
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@Valid @RequestBody User user) throws LoginException, EntityNotFoundException {
-		return ResponseEntity.ok(new JwtResponse(userService.login(user)));
+		JwtResponse response = new JwtResponse(userService.login(user));
+		Map <String, String> mappedResponse = null;
+		if (response.getToken() != null) {
+			mappedResponse = new HashMap();
+			mappedResponse.put("token", response.getToken());
+			mappedResponse.put("username", userService.getUser().getUsername());
+		}
+		
+		return ResponseEntity.ok(mappedResponse);
 	}
 
 }
