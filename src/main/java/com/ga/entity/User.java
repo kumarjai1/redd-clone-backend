@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     
-    @NotBlank(message = "Username cannot be blank")
+//    @NotBlank(message = "Username cannot be blank")
     @Column(unique = true, nullable = false)
     private String username;
     
@@ -35,6 +35,7 @@ public class User {
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_profile_id")
+    @JsonIgnore
     private UserProfile userProfile;
 
     public UserProfile getUserProfile() {
