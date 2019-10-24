@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.ga.config.JwtUtil;
 import com.ga.dao.UserDao;
+import com.ga.entity.Post;
 import com.ga.entity.User;
 import com.ga.exception.EntityNotFoundException;
 import com.ga.exception.LoginException;
@@ -89,6 +90,11 @@ public class UserServiceImpl implements UserService {
 	}
 	public String getUsername() {
 		return username;
+	}
+
+	@Override
+	public List<Post> listPosts() {
+		return userDao.listPosts(getUser());
 	}
 
 }

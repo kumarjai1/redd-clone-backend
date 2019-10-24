@@ -1,10 +1,13 @@
 package com.ga.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ga.entity.Post;
 import com.ga.entity.User;
 import com.ga.exception.EntityNotFoundException;
 
@@ -59,6 +62,20 @@ public class UserDaoImpl implements UserDao {
 			session.close();
 		}
 		return savedUser;
+	}
+
+	@Override
+	public List<Post> listPosts(User user) {
+		Session session = sessionFactory.getCurrentSession();
+		List <Post> posts = null;
+		try {
+			session.beginTransaction();
+			posts = user.getPosts();
+			session.getTransaction().commit();
+		} finally {
+			session.close();
+		}
+		return posts;
 	}
 
 }

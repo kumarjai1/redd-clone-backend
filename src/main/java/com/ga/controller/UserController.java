@@ -1,6 +1,7 @@
 package com.ga.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ga.entity.JwtResponse;
+import com.ga.entity.Post;
 import com.ga.entity.User;
 import com.ga.exception.EntityNotFoundException;
 import com.ga.exception.LoginException;
@@ -55,6 +57,11 @@ public class UserController {
 		}
 		
 		return ResponseEntity.ok(mappedResponse);
+	}
+	
+	@GetMapping("/post")
+	public List<Post> listPosts() {
+		return userService.listPosts();
 	}
 
 }

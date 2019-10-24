@@ -39,7 +39,19 @@ public class User {
     @JsonIgnore
     private UserProfile userProfile;
 
-    public UserProfile getUserProfile() {
+    @JsonIgnore
+    @OneToMany (mappedBy= "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+    private List<Post> posts;
+    
+    public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public UserProfile getUserProfile() {
 		return userProfile;
 	}
 
