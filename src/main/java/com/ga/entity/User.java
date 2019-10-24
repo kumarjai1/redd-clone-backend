@@ -40,10 +40,22 @@ public class User {
     private UserProfile userProfile;
 
     @JsonIgnore
-    @OneToMany (mappedBy= "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+    @OneToMany(fetch = FetchType.EAGER, mappedBy= "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
     private List<Post> posts;
     
-    public List<Post> getPosts() {
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy= "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+    private List<Comment> comments;
+    
+    public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public List<Post> getPosts() {
 		return posts;
 	}
 

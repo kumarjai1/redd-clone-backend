@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ga.entity.Comment;
 import com.ga.entity.JwtResponse;
 import com.ga.entity.Post;
 import com.ga.entity.User;
@@ -62,6 +63,11 @@ public class UserController {
 	@GetMapping("/post")
 	public List<Post> listPosts() {
 		return userService.listPosts();
+	}
+	
+	@GetMapping("/comment")
+	public List<Comment> listComments() {
+		return userService.listComments();
 	}
 
 }

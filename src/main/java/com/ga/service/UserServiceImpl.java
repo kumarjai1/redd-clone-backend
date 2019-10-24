@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.ga.config.JwtUtil;
 import com.ga.dao.UserDao;
+import com.ga.entity.Comment;
 import com.ga.entity.Post;
 import com.ga.entity.User;
 import com.ga.exception.EntityNotFoundException;
@@ -95,6 +96,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Post> listPosts() {
 		return userDao.listPosts(getUser());
+	}
+
+	@Override
+	public List<Comment> listComments() {
+		// TODO Auto-generated method stub
+		return userDao.listComments(getUser());
 	}
 
 }

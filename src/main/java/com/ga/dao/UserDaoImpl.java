@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ga.entity.Comment;
 import com.ga.entity.Post;
 import com.ga.entity.User;
 import com.ga.exception.EntityNotFoundException;
@@ -76,6 +77,20 @@ public class UserDaoImpl implements UserDao {
 			session.close();
 		}
 		return posts;
+	}
+
+	@Override
+	public List<Comment> listComments(User user) {
+		Session session = sessionFactory.getCurrentSession();
+		List <Comment> comments = null;
+		try {
+			session.beginTransaction();
+			comments = user.getComments();
+			session.getTransaction().commit();
+		} finally {
+			session.close();
+		}
+		return comments;
 	}
 
 }
