@@ -26,12 +26,12 @@ public class Comment {
 	private String text;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="user_id", nullable=false)
 	@JsonIgnoreProperties({"password", "email", "userId"})
 	private User user;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-	@JoinColumn(name="post_id")
+	@JoinColumn(name="post_id", nullable=false)
 	@JsonIgnore
 	private Post post;
 

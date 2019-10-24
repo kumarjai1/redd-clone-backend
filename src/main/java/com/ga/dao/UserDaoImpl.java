@@ -34,8 +34,8 @@ public class UserDaoImpl implements UserDao {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.beginTransaction();
-			savedUser = (User)session.createQuery("FROM User u WHERE u.username = '" 
-			+ user.getUsername() + "'").getSingleResult();	
+			savedUser = (User)session.createQuery("FROM User u WHERE u.email = '" 
+			+ user.getEmail() + "'").getSingleResult();	
 		} catch (Exception es) {
 			throw new EntityNotFoundException("User does not exist");
 		}	
