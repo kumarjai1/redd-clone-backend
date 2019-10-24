@@ -20,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableTransactionManagement
 @EnableWebMvc
 @ComponentScan("com.ga")
-@PropertySource(value= {"classpath:jai.properties"})
+@PropertySource(value= "classpath:jai.properties", ignoreResourceNotFound=true)
 public class AppConfig {
 	
 	@Value("${db.user}")

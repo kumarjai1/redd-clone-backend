@@ -40,5 +40,4 @@ public class PostServiceImpl implements PostService {
 	public String deletePost(Long postId) {
 		return postDao.deletePost(postId);
 	}
-
 }
