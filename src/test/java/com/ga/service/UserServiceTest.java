@@ -141,7 +141,7 @@ public class UserServiceTest {
     	
     	when(userDao.listPosts(any())).thenReturn(posts);
     	List<Post> newPostList = userService.listPosts();
-    	assertEquals(posts, newPostList);
+    	assertEquals(posts.get(0), newPostList.get(0));
     	
     }
     
@@ -155,6 +155,7 @@ public class UserServiceTest {
     	comments.add(comment);
     	
     	when(userDao.listComments(any())).thenReturn(comments);
+    	
     	List<Comment> newCommentList = userService.listComments();
     	assertEquals(comments, newCommentList);
     	
