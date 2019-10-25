@@ -6,12 +6,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 import com.ga.entity.Comment;
 import com.ga.entity.Post;
-import com.ga.entity.User;
 import com.ga.service.PostService;
 import com.ga.service.UserService;
 
@@ -50,6 +48,34 @@ public class PostControllerTest {
     }
     
     @Test
+    public void createPost_Post_Success() throws Exception {
+    	Post post = new Post();
+    	post.setPostId(1L);
+    	post.setTitle("test");
+    	post.setDescription("test");
+    	post.setUser(null);
+    	
+    	when(postService.createPost(any())).thenReturn(post);
+    	
+    	RequestBuilder requestBuilder = MockMvcRequestBuilders
+			        .post("/post")
+    				.contentType(MediaType.APPLICATION_JSON)
+    				.content(createPostInJson("test","test"));
+    	
+    	MvcResult result = mockMvc.perform(requestBuilder)
+				.andExpect(status().isOk())
+				.andExpect(content().json("{\"postId\":1, \"title\":\"test\",\"description\":\"test\",\"user\":null}"))
+	            .andReturn();
+    }
+    
+    private static String createPostInJson(String title, String description) {
+        return "{ \"title\": \"" + title + "\", " +
+                "\"description\":\"" + description + "\"}";
+    }
+    
+    
+
+	@Test
  	public void listPosts_Post_Success() throws Exception {
     	List<Post> testPosts = new ArrayList();
     	Post post = new Post();
@@ -71,11 +97,6 @@ public class PostControllerTest {
     	System.out.println(result.getResponse().getContentAsString());	
  	}
     
-    
-//	@GetMapping("{postId}/comment")
-//	public List<Comment> getComments(@PathVariable Long postId) {
-//		return postService.listComments(postId);
-//	}
     @Test
  	public void getComments_Post_Success() throws Exception {
     	List<Comment> testComments = new ArrayList();
