@@ -27,10 +27,10 @@ public class Post {
 //    @JsonIgnoreProperties({ "password", "email", "userId", "userProfile"})
     private User user;
     
-//    @JsonIgnore
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = {CascadeType.REMOVE, 
-//    		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
-//    private List<Comment> comments;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = {CascadeType.REMOVE, 
+    		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Comment> comments;
 //
 //	public List<Comment> getComments() {
 //		return comments;

@@ -43,11 +43,11 @@ public class UserServiceTest {
     
     @Before
     public void initializeDummyUser() {
-   
         user.setUserId(1L);
         user.setUsername("test");
         user.setEmail("test@test.com");
         user.setPassword("test");
+        
     }
      
 //    @Test
@@ -111,5 +111,16 @@ public class UserServiceTest {
       
         assertEquals(token, null);
         
+    }
+    
+    @Test
+    public void getUser_ReturnUser_Success() {
+    	User user2 = user;
+    	assertEquals(user2, user);
+    }
+    
+    @Test 
+    public void listPosts_ReturnPostList_Success() {
+    	
     }
 }
