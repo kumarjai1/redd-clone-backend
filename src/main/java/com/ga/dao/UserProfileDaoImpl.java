@@ -39,8 +39,18 @@ public class UserProfileDaoImpl implements UserProfileDao{
 	@Override
 	public UserProfile getProfile() {
 		User currentUser = userService.getUser(); 
+		UserProfile currentProfile = null;
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			session.beginTransaction();
+			currentProfile = currentUser.getUserProfile();
+			session.getTransaction().commit();
+			
+		} finally {
+			session.close();
+		}
 		// TODO Auto-generated method stub
-		return currentUser.getUserProfile();
+		return currentProfile;
 	}
 	
 }
