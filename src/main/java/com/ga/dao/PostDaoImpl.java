@@ -44,7 +44,7 @@ public class PostDaoImpl implements PostDao {
 		}
 		return allPosts;
  	}
-
+	
 	@Override
 	public List<Comment> listComments(Long postId) {
 		Session session = sessionFactory.getCurrentSession();
@@ -52,8 +52,11 @@ public class PostDaoImpl implements PostDao {
 		List <Comment> comments = null;
 		try {
 			session.beginTransaction();
-			currentPost = session.get(Post.class, postId);
-			comments = currentPost.getComments();
+			
+			comments = session.createQuery("FROM Comment c WHERE c.post.postId = " + postId).getResultList();
+//			currentPost = session.get(Post.class, postId);
+//			comments = currentPost.getComments();
+			
 			session.getTransaction().commit();
 		} finally {
 			session.close();
