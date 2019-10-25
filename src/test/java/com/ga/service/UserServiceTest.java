@@ -85,7 +85,7 @@ public class UserServiceTest {
 
         assertEquals(token, null);
     }
-    
+     
     @Test
     public void login_ReturnsJwt_Success() throws EntityNotFoundException, LoginException {
         String expectedToken = "12345";
