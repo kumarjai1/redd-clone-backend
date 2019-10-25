@@ -29,11 +29,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/hello")
-	public String helloWorld() {
-		return "Hello World";
-	}
-	
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@Valid @RequestBody User user) {
 		JwtResponse response = new JwtResponse(userService.signup(user));
