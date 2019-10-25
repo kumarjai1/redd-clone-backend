@@ -62,10 +62,9 @@ public class UserProfileServiceTest {
 		userProfile.setAdditionalEmail("additionalemail@testcom");
 		userProfile.setAddress("123 street");
 		userProfile.setMobile("1234562890");
-		UserProfile newProfile = userProfileService.createUserProfile(userProfile);
-		System.out.print(newProfile.getAddress());
-		when(userProfileDao.createUserProfile(any())).thenReturn(userProfile);
 		
+		when(userProfileDao.createUserProfile(any())).thenReturn(userProfile);
+		UserProfile newProfile = userProfileService.createUserProfile(userProfile);
 //		Assert.assertNotNull(newProfile);
 		Assert.assertEquals(newProfile.getAddress(), userProfile.getAddress());
 	}
@@ -77,9 +76,9 @@ public class UserProfileServiceTest {
 		userProfile.setAddress("123 street");
 		userProfile.setMobile("1234562890");
 		user.setUserProfile(userProfile);
-		UserProfile tempProfile = user.getUserProfile();
-		when(userProfileDao.getProfile()).thenReturn(userProfile);
 		
+		when(userProfileDao.getProfile()).thenReturn(userProfile);
+		UserProfile tempProfile = userProfileService.getUserProfile();
 		Assert.assertNotNull(tempProfile.getAdditionalEmail());
 		Assert.assertEquals(tempProfile.getAdditionalEmail(), userProfile.getAdditionalEmail());
 	}
