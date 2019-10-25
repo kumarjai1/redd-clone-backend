@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ga.config.JwtUtil;
 import com.ga.dao.UserDao;
+import com.ga.entity.Comment;
+import com.ga.entity.Post;
 import com.ga.entity.User;
 import com.ga.exception.EntityNotFoundException;
 import com.ga.exception.LoginException;
@@ -18,6 +20,9 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserServiceTest { 
 	
@@ -48,6 +53,11 @@ public class UserServiceTest {
         user.setEmail("test@test.com");
         user.setPassword("test");
         
+    }
+    
+    @Before
+    public void initiateDummyPost() {
+    	
     }
      
 //    @Test
@@ -121,6 +131,33 @@ public class UserServiceTest {
     
     @Test 
     public void listPosts_ReturnPostList_Success() {
+    	List<Post> posts = new ArrayList();
+    	Post post = new Post();
+    	post.setPostId(1L);
+    	post.setTitle("Test title");
+    	post.setDescription("test description");
+    	post.setUser(user);
+    	posts.add(post);
+    	
+    	when(userDao.listPosts(any())).thenReturn(posts);
+    	List<Post> newPostList = userService.listPosts();
+    	assertEquals(posts, newPostList);
     	
     }
+    
+    @Test 
+    public void listComments_ReturnCommentList_Success() {
+    	List<Comment> comments = new ArrayList();
+    	Comment comment = new Comment();
+    	comment.setCommentId(1L);
+    	comment.setText("test comment");
+    	comment.setUser(user);
+    	comments.add(comment);
+    	
+    	when(userDao.listComments(any())).thenReturn(comments);
+    	List<Comment> newCommentList = userService.listComments();
+    	assertEquals(comments, newCommentList);
+    	
+    }
+    
 }
