@@ -76,12 +76,6 @@ public class UserProfileServiceTest {
 		userProfile.setAddress("123 street");
 		userProfile.setMobile("1234562890");
 		user.setUserProfile(userProfile);
-<<<<<<< HEAD
-=======
-		
-		when(userProfileDao.getProfile()).thenReturn(userProfile);
-		UserProfile tempProfile = userProfileService.getUserProfile();
->>>>>>> test-comment-service
 		
 		when(userProfileDao.getProfile()).thenReturn(userProfile);
 		UserProfile tempProfile = userProfileService.getUserProfile();

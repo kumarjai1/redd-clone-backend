@@ -88,7 +88,7 @@ public class PostDaoTest {
     	
     	List<Post> fetchedPosts = postDao.listPosts();
     	
-    	assertEquals(fetchedPosts, testPosts);
+    	assertEquals(fetchedPosts.get(0).getTitle(), testPosts.get(0).getTitle());
     	
     }
     
