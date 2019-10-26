@@ -126,7 +126,7 @@ public class UserServiceTest {
     @Test
     public void getUser_ReturnUser_Success() {
     	User user2 = user;
-    	assertEquals(user2, user);
+    	assertEquals(user2.getEmail(), user.getEmail());
     }
     
     @Test 
