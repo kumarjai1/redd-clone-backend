@@ -35,9 +35,6 @@ public class UserServiceImpl implements UserService {
 	
 	private User user;
 	
-	//just passing username - to refactor
-	private String username;
-	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
@@ -45,8 +42,6 @@ public class UserServiceImpl implements UserService {
 		//this saves the current user to be returned later
 		this.user = user;
 		
-		//passing username only to possibly refactor
-		this.username = username;
 		if (user == null) throw new UsernameNotFoundException("Unknown usernamer " + username);
 		return new org.springframework.security.core.userdetails.User
 				(user.getUsername(), bCryptPasswordEncoder.encode(user.getPassword()), true, true, true, true, getGrantedAuthorities(user));
@@ -88,9 +83,6 @@ public class UserServiceImpl implements UserService {
 	
 	public User getUser() {
 		return user;
-	}
-	public String getUsername() {
-		return username;
 	}
 
 	@Override
