@@ -74,4 +74,12 @@ public class UserProfileDaoTest {
 		assertNotNull(tempUserProfile);
 		assertEquals(tempUserProfile.getAdditionalEmail(), userProfile.getAdditionalEmail());
 	}
+	
+	@Test
+	public void getProfile_ReturnsProfile_Success() {
+		when(userService.getUser()).thenReturn(user);
+		when(user.getUserProfile()).thenReturn(userProfile);
+		UserProfile tempUserProfile = userProfileDao.getProfile();
+		assertNotNull(tempUserProfile.getAdditionalEmail());
+		assertEquals(tempUserProfile.getAdditionalEmail(), userProfile.getAdditionalEmail());	}
 }
