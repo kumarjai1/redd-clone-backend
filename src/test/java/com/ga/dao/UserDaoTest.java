@@ -83,6 +83,13 @@ public class UserDaoTest {
         assertEquals(savedUser, user);
     }	
      
+    @Test(expected=EntityNotFoundException.class)
+    public void login_Exception_EntityNotFoundException() throws EntityNotFoundException {
+    	when(session.createQuery(anyString())).thenReturn(query);
+    	when(query.getSingleResult()).thenThrow(new RuntimeException("test"));
+    	userDao.login(user);
+    }
+    
     @Test
     public void getUserByUsername_User_Success() {
     	when(session.createQuery(anyString())).thenReturn(query);

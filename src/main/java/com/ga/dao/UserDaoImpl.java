@@ -42,10 +42,10 @@ public class UserDaoImpl implements UserDao {
 			+ user.getEmail() + "'").getSingleResult();	
 		} catch (Exception es) {
 			throw new EntityNotFoundException("User does not exist");
-		}	
-			finally {
-		}
+		}	finally {
 			session.close();
+		}
+			
 		
 		// TODO Auto-generated method stub
 		return savedUser;
