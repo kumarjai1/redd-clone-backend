@@ -21,15 +21,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan("com.ga")
 
-//@PropertySource(value= "classpath:jai.properties", ignoreResourceNotFound=true)
+@PropertySource(name="jaiProperties", value= "classpath:jai.properties", ignoreResourceNotFound=true)
 public class AppConfig {
 	
-//	@Value("${db.user}")
-//	private String dbUser;
-//	@Value("${db.password}")
-//	private String dbPassword;
-	
-	
+
+	@Value("${db.user: }")
+	String dbUser;
+	@Value("${db.password: }")
+	String dbPassword;		
  
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
@@ -49,10 +48,11 @@ public class AppConfig {
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/reddclone");
 		
-//		if (dbUser != null) {
-//			dataSource.setUsername(dbUser);
-//			dataSource.setPassword(dbPassword);
-//		}
+		
+		if (dbUser != null) {
+			dataSource.setUsername(dbUser);
+			dataSource.setPassword(dbPassword);
+		}
 		
 		return dataSource;
 	}

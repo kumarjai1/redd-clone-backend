@@ -29,9 +29,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
     
-    @NotBlank(message = "Email cannot be blank")
-    @Column(name = "email", nullable = false, unique=true)
-    @Email(message = "{user.email.invalide}")
+    @NotBlank(message = "Email cannot be blank")    
+    @Column(name = "email", unique = true, nullable = false)
+    @Email(message = "User email is invalid")
     private String email;
     
     @OneToOne(cascade = CascadeType.ALL)
