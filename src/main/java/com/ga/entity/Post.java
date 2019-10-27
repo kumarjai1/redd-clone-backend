@@ -28,17 +28,17 @@ public class Post {
     private User user;
     
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = {CascadeType.REMOVE, 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = {CascadeType.REMOVE, 
     		CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Comment> comments;
-//
-//	public List<Comment> getComments() {
-//		return comments;
-//	}
-//
-//	public void setComments(List<Comment> comments) {
-//		this.comments = comments;
-//	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
 	public Long getPostId() {
 		return postId;
