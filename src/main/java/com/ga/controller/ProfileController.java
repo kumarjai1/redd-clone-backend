@@ -29,7 +29,11 @@ public class ProfileController {
 	
 	@GetMapping
 	public UserProfile getUserProfile() {
-		return userProfileService.getUserProfile();
+		UserProfile userProfile = userProfileService.getUserProfile();
+		if (userProfile == null) {
+			userProfile = new UserProfile();
+		}
+		return userProfile;
 	}
 
 }
