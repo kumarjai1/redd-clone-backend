@@ -103,7 +103,7 @@ public class PostDaoTest {
     	when(session.createQuery(anyString())).thenReturn(queryComment);
     	when(queryComment.getResultList()).thenReturn(testComments);
     	
-    	List<Post> fetchedComments = postDao.listPosts();
+    	List<Comment> fetchedComments = postDao.listComments(1L);
     	
     	assertEquals(fetchedComments, testComments);
     }
