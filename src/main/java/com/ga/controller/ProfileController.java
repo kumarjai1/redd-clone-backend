@@ -22,15 +22,15 @@ public class ProfileController {
 	}
 	
 	@PostMapping
-	public UserProfile createUserProfile(@RequestBody UserProfile userProfile) {
-		return userProfileService.createUserProfile(userProfile);
+	public UserProfile createUserProfile(@RequestBody UserProfile userProfile) { 
+			return userProfileService.createUserProfile(userProfile);
 				
 	}
 	
 	@GetMapping
 	public UserProfile getUserProfile() {
 		UserProfile userProfile = userProfileService.getUserProfile();
-		if (userProfile == null) {
+		if (userProfile.getAdditionalEmail() == null && userProfile.getMobile() == null && userProfile.getAddress() == null) {
 			userProfile = new UserProfile();
 		}
 		return userProfile;
